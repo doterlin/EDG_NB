@@ -1,34 +1,122 @@
-html,body,.wrapper{
+html,
+body,
+.wrapper {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    position: relative;
 }
 
-.wrapper{
+.wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
+.bg {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    white-space: nowrap;
+    opacity: .8;
+    transform: rotate(-40deg) scale(2.5);
+}
 
-.logo{
-    width: 400px;
-    height: 400px;
+.bg-row {
+    height: 100%;
+    width: 30px;
+    display: inline-block;
+    margin-right: 50px;
+    background-color: #014DE6;
+    position: relative;
+}
+
+.bg-text {
+    writing-mode: vertical-rl;
+    color: #fff;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: bolder;
+    margin: 0;
+    position: absolute;
+    margin-bottom: 70px;
+    top: 0;
+}
+
+.slideDown {
+    animation: slideDown 10s linear;
+}
+
+
+
+.desktop{
+    width: 100vw;
+    height: calc(50vh - 200px);
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    background-color: #000;
+    opacity: .5;
+} 
+
+.logo {
+    width: 500px;
+    height: 500px;
     animation: rotateY 4s linear infinite;
+    position: relative;
+    z-index: 10;
     /* box-shadow: 10px 10px 10px 10px #000; */
 }
 
-.logo.reflection{
+.logo.reflection {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -200px;
-    margin-top: 204px;
-    opacity: .1;
+    margin-left: -250px;
+    margin-top: 256px;
+    opacity: .3;
+    animation: rotateXY 4s linear infinite;
 }
 
-@keyframes rotateY{
-    0% {transform: rotateY(0deg)}
-    50% {transform: rotateY(90deg)}
+@keyframes rotateY {
+    0% {
+        transform: rotateY(0deg)
+    }
+
+    50% {
+        transform: rotateY(90deg)
+    }
+
+    100% {
+        transform: rotateY(0deg)
+    }
+}
+
+@keyframes rotateXY {
+    0% {
+        transform: rotateX(180deg) rotateY(0deg)
+    }
+
+    50% {
+        transform: rotateX(180deg) rotateY(90deg)
+    }
+
+
+    100% {
+        transform: rotateX(180deg) rotateY(0)
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100vh);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
 }
