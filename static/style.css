@@ -7,6 +7,8 @@ body,
     padding: 0;
     overflow: hidden;
     position: relative;
+    font-family: fantasy;
+    color: #fff;
 }
 
 .audio{
@@ -40,6 +42,10 @@ body,
     position: relative;
 }
 
+.bg-row:nth-child(odd){
+    opacity: .3;
+}
+
 .bg-text {
     writing-mode: vertical-rl;
     color: #fff;
@@ -54,6 +60,10 @@ body,
 
 .slideDown {
     animation: slideDown 10s linear;
+}
+
+.slideLeft {
+    animation: slideLeft 10s linear;
 }
 
 
@@ -138,6 +148,28 @@ body,
     animation: rotateXY 4s linear infinite;
 }
 
+.bullet-screen{
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(50vh + 100px);
+    font-weight: bolder;
+    text-align: right;
+}
+
+.bullet-text{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    background-color: #000;
+    border-radius: 3px;
+    padding: 0 15px;
+    line-height: 40px;
+    height: 40px;
+}
+
 @keyframes rotateY {
     0% {
         transform: rotateY(0deg)
@@ -174,5 +206,16 @@ body,
 
     100% {
         transform: translateY(100vh);
+    }
+}
+
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(200px);
+    }
+
+    100% {
+        transform: translateX(-100vw);
     }
 }

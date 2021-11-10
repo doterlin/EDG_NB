@@ -4,6 +4,8 @@
 (function (window) {
 
     document.addEventListener('DOMContentLoaded', function (params) {
+        
+        // 画背景
         var randomTextArray = [
             ' We are the champions!',
             ' League Of Legends',
@@ -17,16 +19,20 @@
         var bg = new Bg(document.getElementById('bg'), randomTextArray);
         bg.draw();
 
-        // setTimeout(() => {
-        //     document.getElementById('bgm').play()
-        // }, 1000);
-        // console.log(document.getElementById('bgm'))
+        document.getElementById('btn-list').addEventListener('click', function (event) {
+            // 播放音乐
+            document.getElementById('bgm').play();
 
-        document.getElementById('btn-list').addEventListener('click', function (params) {
-            document.getElementById('bgm').play()
+            // 发弹幕
+            console.log(event, event.target.className)
+            var child = event.target;
+            if(child.className === 'btn'){
+                new Bullet(child.innerText, 1, document.getElementById('bullet')).go(true)
+            }
         })
-    })
 
+
+    })
 
     // Bg类，画背景
     // @param parentElement 画背景的节点
@@ -43,12 +49,12 @@
 
     }
     // 入口方法，开始画背景
-    Bg.prototype.draw = function (params) {
+    Bg.prototype.draw = function () {
         this.drawRow();
     }
 
 
-    Bg.prototype.drawRow = function (params) {
+    Bg.prototype.drawRow = function () {
         // parent节点能画多少列
         var rowNumber = Math.ceil(this.parentW / (this.rowWidth + this.rowMargin));
         
@@ -64,7 +70,7 @@
     }
 
 
-    Bg.prototype.destroy = function name(params) {
+    Bg.prototype.destroy = function () {
         this.parentElement.innerHTML = '';
     }
 
@@ -75,9 +81,7 @@
         this.textArray = textArray;
         this.aniTime = 10000; //文字动画滚动时长
     
-        // setTimeout(() => {
-            this.createRomdomTextEl();
-        // }, (Math.random() * 2) * 1000);
+        this.createRomdomTextEl();
     }
 
     ScrollText.prototype.createRomdomTextEl = function () {
@@ -97,6 +101,37 @@
             ts.createRomdomTextEl();
         }, (Math.random() * 1 + 2.2) * 1000);
         
+    }
+
+    // 弹幕类
+    // @param text 弹幕文字
+    // @param aniType 弹幕动画类型
+    function Bullet(text, aniType, parentElement){
+        this.text = text;
+        this.aniType = aniType;
+        this.parentElement = parentElement;
+        
+        this.el = null;
+        this.aniTime = 10 * 1000; //弹幕留存时间
+
+        this.create()
+    }
+
+    Bullet.prototype.create = function(){
+        this.el = document.createElement('div');
+        this.el.innerHTML = this.text;
+        this.el.setAttribute('class', 'bullet-text slideLeft');
+        
+        //初始高度随机
+        this.el.setAttribute('style', 'top: ' + Math.random()* 90 + '%;');
+    }
+
+    Bullet.prototype.go = function(){
+        var ts = this;
+        ts.parentElement.append(ts.el);
+        setTimeout(function(){
+            ts.parentElement.removeChild(ts.el)
+        }, this.aniTime)
     }
 
 })();
