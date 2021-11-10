@@ -9,12 +9,17 @@ body,
     position: relative;
 }
 
+.audio{
+    display: none;
+}
+
 .wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
+
 .bg {
     width: 100vw;
     height: 100vh;
@@ -53,22 +58,73 @@ body,
 
 
 
-.desktop{
+.desktop {
     width: 100vw;
-    height: calc(50vh - 200px);
+    height: calc(50vh - 100px);
     position: absolute;
     z-index: 2;
     bottom: 0;
     background-color: #000;
     opacity: .5;
-} 
+}
+
+.desktop-content {
+    width: 100vw;
+    height: calc(50vh - 100px);
+    position: absolute;
+    z-index: 11;
+    bottom: 0;
+    box-sizing: content-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-direction: column;
+}
+
+.dc-main {
+    color: #fff;
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+.btn-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    background: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 16px;
+    color: #000;
+    border-radius: 5px;
+    padding: 0 35px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.btn:first-child {
+    margin-left: 0;
+}
+
+.btn:hover {
+    background: #000;
+    color: #fff;
+}
 
 .logo {
     width: 500px;
     height: 500px;
     animation: rotateY 4s linear infinite;
     position: relative;
+    top: -65px;
     z-index: 10;
+    /* opacity: .3; */
     /* box-shadow: 10px 10px 10px 10px #000; */
 }
 
@@ -77,7 +133,7 @@ body,
     top: 50%;
     left: 50%;
     margin-left: -250px;
-    margin-top: 256px;
+    margin-top: 200px;
     opacity: .3;
     animation: rotateXY 4s linear infinite;
 }

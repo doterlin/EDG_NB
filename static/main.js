@@ -16,6 +16,15 @@
         ];
         var bg = new Bg(document.getElementById('bg'), randomTextArray);
         bg.draw();
+
+        // setTimeout(() => {
+        //     document.getElementById('bgm').play()
+        // }, 1000);
+        // console.log(document.getElementById('bgm'))
+
+        document.getElementById('btn-list').addEventListener('click', function (params) {
+            document.getElementById('bgm').play()
+        })
     })
 
 
@@ -86,7 +95,7 @@
         
         setTimeout(() => {
             ts.createRomdomTextEl();
-        }, (Math.random() * 1 + 2) * 1000);
+        }, (Math.random() * 1 + 2.2) * 1000);
         
     }
 
