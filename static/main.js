@@ -2,13 +2,14 @@
 // description: 主要是背景部分的编写，使用ES5
 
 (function (window) {
+    var parentEl = document.getElementById('bullet');
 
     document.addEventListener('DOMContentLoaded', function (params) {
         
         // 画背景
         var randomTextArray = [
-            ' We are the champions!',
-            ' League Of Legends',
+            'We are the champions!',
+            'League Of Legends',
             'WORLDS 2021 champions',
             'EDG VS DK',
             'EDWARD GAMING',
@@ -24,15 +25,18 @@
             document.getElementById('bgm').play();
 
             // 发弹幕
-            console.log(event, event.target.className)
             var child = event.target;
             if(child.className === 'btn'){
-                new Bullet(child.innerText, 1, document.getElementById('bullet')).go(true)
+                makeOneBullet(child.innerText, true)
             }
         })
-
-
     })
+
+
+    function makeOneBullet(text, isMine){
+        console.log('skillType: ', document.getElementById('skill-type').value)
+        new Bullet(text, document.getElementById('skill-type').value, parentEl).go(isMine)
+    }
 
     // Bg类，画背景
     // @param parentElement 画背景的节点
@@ -112,15 +116,19 @@
         this.parentElement = parentElement;
         
         this.el = null;
-        this.aniTime = 10 * 1000; //弹幕留存时间
+        this.aniTime = aniType === '1'? 4000: 10000; //弹幕留存时间
 
         this.create()
     }
 
     Bullet.prototype.create = function(){
         this.el = document.createElement('div');
-        this.el.innerHTML = this.text;
-        this.el.setAttribute('class', 'bullet-text slideLeft');
+        if(this.aniType === '6'){
+            this.el.innerHTML = '<img class="img-0-21-0" src="../static/imgs/0-21-0.webp"/><div>' + this.text + '</div>' 
+        }else{
+            this.el.innerHTML = this.text;
+        }
+        this.el.setAttribute('class', 'bullet-text bullet-ani' + this.aniType);
         
         //初始高度随机
         this.el.setAttribute('style', 'top: ' + Math.random()* 90 + '%;');
