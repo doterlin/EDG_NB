@@ -7,7 +7,6 @@
     <title>EDG牛逼！</title>
 
     <link rel="stylesheet" href="../static/style.css">
-    <script src="../static/socket.io.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -23,40 +22,36 @@
         <!-- 仿镜面 -->
         <div class="desktop"></div>
         <div class="desktop-content">
-            <div class="dc-main">累计施放弹幕技能351次</div>
+            <div class="dc-main">为冠军喝彩了351次</div>
             <div class="select">
-                选择弹幕的BO5技能：
-                <select id="skill-type">
-                    <option value="1">洛-R</option>
-                    <option value="2">佐伊-E</option>
-                    <option value="3">赵信-R</option>
-                    <option value="4">凯南-R</option>
-                    <option value="5">厄斐琉斯-E?</option>
-                    <option value="6">风男EEEE（客串）</option>
+                选择弹幕技能：
+                <select>
+                    <option>赵信的R（旋转）</option>
+                    <option>妖姬的E（水平）</option>
+                    <option>炸弹人的Q（波浪）</option>
+                    <option>风男的E（亮狗牌）</option>
                 </select>
                 再点击下面施放
             </div>
             <div class="btn-list" id="btn-list">
                 <div class="btn">EDG牛逼！！！</div>
-                <div class="btn">LBW NB!</div>
                 <div class="btn">777777</div>
                 <div class="btn">汗子哥好兄弟</div>
                 <div class="btn">JieJie 666！</div>
                 <div class="btn">我们是冠军！</div>
-                <div class="btn">E往无前</div>
             </div>
 
         </div>
 
         <!-- Logo -->
-         <img class="logo" src="../static/imgs/EDG.png" /> 
-        <img class="logo reflection" src="../static/imgs/EDG.png" />
+        <img class="logo" src="../static/imgs/EDG2.png" />
+        <img class="logo reflection" src="../static/imgs/EDG2.png" />
 
         <!-- 标注 -->
         <div class="author"></div>
         
         <!-- 弹幕 -->
-        <div class="bullet-screen" id="bullet"></div>
+        <div class="bullet_screen"></div>
         
     </div>
     <script src="../static/main.js"></script>

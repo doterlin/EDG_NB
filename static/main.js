@@ -5,7 +5,8 @@
     var parentEl = document.getElementById('bullet');
 
     document.addEventListener('DOMContentLoaded', function (params) {
-        
+        var socket = createSocketIo();
+
         // 画背景
         var randomTextArray = [
             'We are the champions!',
@@ -26,17 +27,21 @@
 
             // 发弹幕
             var child = event.target;
-            if(child.className === 'btn'){
-                makeOneBullet(child.innerText, true)
+            if (child.className === 'btn') {
+                // makeOneBullet(child.innerText, true)
+                socket.emit("add", {
+                    text: child.innerText,
+                    aniType: document.getElementById('skill-type').value
+                });
             }
         })
+
     })
 
-
-    function makeOneBullet(text, isMine){
-        console.log('skillType: ', document.getElementById('skill-type').value)
-        new Bullet(text, document.getElementById('skill-type').value, parentEl).go(isMine)
-    }
+    // function makeOneBullet(text, isMine) {
+    //     console.log('skillType: ', document.getElementById('skill-type').value)
+    //     new Bullet(text, document.getElementById('skill-type').value, parentEl).go(isMine)
+    // }
 
     // Bg类，画背景
     // @param parentElement 画背景的节点
@@ -44,7 +49,7 @@
         this.parentElement = parentElement;
         this.randomTextArray = randomTextArray;
         this.parentW = parentElement.clientWidth,
-        this.parentH = parentElement.clientHeight;
+            this.parentH = parentElement.clientHeight;
 
         this.rowWidth = 40;
         this.rowMargin = 50;
@@ -61,7 +66,7 @@
     Bg.prototype.drawRow = function () {
         // parent节点能画多少列
         var rowNumber = Math.ceil(this.parentW / (this.rowWidth + this.rowMargin));
-        
+
         for (let i = 0; i < rowNumber; i++) {
             var el = document.createElement('div');
             el.setAttribute('class', 'bg-row');
@@ -69,8 +74,7 @@
 
             new ScrollText(el, this.randomTextArray);
         }
-        
-        console.log('row num', this, rowNumber)
+
     }
 
 
@@ -84,7 +88,7 @@
         this.rowElement = rowElement;
         this.textArray = textArray;
         this.aniTime = 10000; //文字动画滚动时长
-    
+
         this.createRomdomTextEl();
     }
 
@@ -100,46 +104,69 @@
         setTimeout(function () {
             ts.rowElement.removeChild(p)
         }, this.aniTime);
-        
+
         setTimeout(() => {
             ts.createRomdomTextEl();
         }, (Math.random() * 1 + 2.2) * 1000);
-        
+
     }
 
     // 弹幕类
     // @param text 弹幕文字
     // @param aniType 弹幕动画类型
-    function Bullet(text, aniType, parentElement){
+    function Bullet({ text, aniType, isCustomer }, parentElement) {
         this.text = text;
         this.aniType = aniType;
+        this.isCustomer = isCustomer;
         this.parentElement = parentElement;
-        
+
         this.el = null;
-        this.aniTime = aniType === '1'? 4000: 10000; //弹幕留存时间
+        this.aniTime = aniType === '1' ? 4000 : 10000; //弹幕留存时间
 
         this.create()
     }
 
-    Bullet.prototype.create = function(){
+    Bullet.prototype.create = function () {
         this.el = document.createElement('div');
-        if(this.aniType === '6'){
-            this.el.innerHTML = '<img class="img-0-21-0" src="../static/imgs/0-21-0.webp"/><div>' + this.text + '</div>' 
-        }else{
-            this.el.innerHTML = this.text;
+        var innerHTML = this.text;
+
+        if (this.isCustomer) {
+            innerHTML += '<span class="vip-tag"> 来自尊贵的程序员</span>';
         }
+        if (this.aniType === '6') {
+            innerHTML = '<img class="img-0-21-0" src="../static/imgs/0-21-0.webp"/><div>' + innerHTML + '</div>'
+        }
+
+        this.el.innerHTML = innerHTML;
         this.el.setAttribute('class', 'bullet-text bullet-ani' + this.aniType);
-        
+
         //初始高度随机
-        this.el.setAttribute('style', 'top: ' + Math.random()* 90 + '%;');
+        this.el.setAttribute('style', 'top: ' + Math.random() * 90 + '%;');
     }
 
-    Bullet.prototype.go = function(){
+    Bullet.prototype.go = function () {
         var ts = this;
         ts.parentElement.append(ts.el);
-        setTimeout(function(){
+        setTimeout(function () {
             ts.parentElement.removeChild(ts.el)
         }, this.aniTime)
     }
 
+
+    // websocket
+    function createSocketIo() {
+
+        var socket = io('localhost:3300', { transports: ['websocket'] });
+        // 监听连接
+        socket.on('connect', function () {
+            console.log('%c connect success.', 'color: #690');
+        });
+        // 监听数据
+        socket.on('add', function (data) {
+            console.log('event', data);
+            new Bullet(data, parentEl).go(true)
+        });
+
+        return socket;
+    }
 })();
