@@ -1,11 +1,14 @@
 // author: doterlin(岛民小强)
 // description: 主要是背景部分的编写，使用ES5
-
+// TODO: 统计,二维码,websocket守护进程,抽出前后端config,移动端适配
 (function (window) {
     var parentEl = document.getElementById('bullet');
-
+    var countText1 = document.getElementById('number_text1');
+    var countText2 = document.getElementById('number_text2');
+    
     document.addEventListener('DOMContentLoaded', function (params) {
         var socket = createSocketIo();
+
 
         // 画背景
         var randomTextArray = [
@@ -37,11 +40,6 @@
         })
 
     })
-
-    // function makeOneBullet(text, isMine) {
-    //     console.log('skillType: ', document.getElementById('skill-type').value)
-    //     new Bullet(text, document.getElementById('skill-type').value, parentEl).go(isMine)
-    // }
 
     // Bg类，画背景
     // @param parentElement 画背景的节点
@@ -161,9 +159,16 @@
         socket.on('connect', function () {
             console.log('%c connect success.', 'color: #690');
         });
+
+        //监听计数 
+        socket.on('count', function (data) {
+            countText1.innerHTML = data.C1;
+            countText2.innerHTML = data.C2;
+            
+        });
+
         // 监听数据
         socket.on('add', function (data) {
-            console.log('event', data);
             new Bullet(data, parentEl).go(true)
         });
 

@@ -21,6 +21,9 @@ server.listen(3300, () => {
 var io = require('socket.io')(server);
 // 连接
 io.on('connection', function (socket) {
+    getCount(res => {
+        socket.emit('count', res)
+    })
     // 监听
     socket.on('add', function (data, a2, a3) {
         const _data = {
@@ -29,6 +32,10 @@ io.on('connection', function (socket) {
         }
         socket.emit('add', _data);
         addRecord(_data, socket);
+
+        getCount(res => {
+            socket.emit('count', res)
+        })
     });
 });
 
@@ -53,5 +60,15 @@ function addRecord({ text, aniType, isCustomer }, socket) {
 `
     db.query(sql, function (error, results, fields) {
         if (error) throw error;
+    });
+}
+
+function getCount(callback){
+    const sql = `SELECT (SELECT COUNT(*) FROM bullet) AS C1, 
+(SELECT COUNT(*) FROM bullet where is_custom=1)AS C2`;
+    db.query(sql, function (error, results, fields) {
+        if (error) throw error;
+        console.log(results)
+        callback(results[0])
     });
 }

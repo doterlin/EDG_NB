@@ -92,8 +92,17 @@ body,
 
 .dc-main {
     color: #fff;
-    font-size: 60px;
+    font-size: 30px;
     font-weight: bolder;
+}
+
+.num_text{
+    font-size: 60px;
+    padding: 0 10px;
+}
+
+.select{
+    margin-top: 20px;
 }
 
 .btn-list {
