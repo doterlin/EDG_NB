@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,20 @@
     <title>EDG牛逼！</title>
 
     <link rel="stylesheet" href="../static/style.css">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?222348bfa72c1fe99ff5dbfcf176011d";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        _hmt.push(['_trackPageview', location.href]);
+    </script>
+
     <script src="../static/socket.io.min.js"></script>
 </head>
+
 <body>
     <div class="wrapper">
         <audio class="audio" id="bgm" preload controls height="1" width="1" loop autoplay>
@@ -19,11 +32,12 @@
 
         <!-- 背景和底部内容 -->
         <div class="bg" id="bg"></div>
-        
+
         <!-- 仿镜面 -->
         <div class="desktop"></div>
         <div class="desktop-content">
-            <div class="dc-main">累计施放弹幕技能<span class="num_text" id="number_text1">0</span>次, 触发彩蛋<span class="num_text" id="number_text2">0</span>次</div>
+            <div class="dc-main">累计施放弹幕技能<span class="num_text" id="number_text1">0</span>次, 触发彩蛋<span class="num_text"
+                    id="number_text2">0</span>次</div>
             <div class="select">
                 选择弹幕的BO5技能：
                 <select id="skill-type">
@@ -48,16 +62,17 @@
         </div>
 
         <!-- Logo -->
-         <img class="logo" src="../static/imgs/EDG.png" /> 
+        <img class="logo" src="../static/imgs/EDG.png" />
         <img class="logo reflection" src="../static/imgs/EDG.png" />
 
         <!-- 标注 -->
         <div class="author"></div>
-        
+
         <!-- 弹幕 -->
         <div class="bullet-screen" id="bullet"></div>
-        
+
     </div>
     <script src="../static/main.js"></script>
 </body>
+
 </html>

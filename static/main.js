@@ -1,7 +1,7 @@
 // author: doterlin(岛民小强)
-// description: 主要是背景部分的编写，使用ES5
+// description: 主要是背景动画,弹幕效果和建立websocket连接
 // TODO: 统计,二维码,websocket守护进程,抽出前后端config,移动端适配
-(function (window) {
+(function () {
     var parentEl = document.getElementById('bullet');
     var countText1 = document.getElementById('number_text1');
     var countText2 = document.getElementById('number_text2');

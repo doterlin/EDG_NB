@@ -1,17 +1,9 @@
-
-// db.query('SELECT * FROM edg_nb', function (error, results, fields) {
-//     if (error) throw error;
-//     // connected!
-//     console.log('db test results: ', results)
-// });
 const db = require("./db")
 let http = require("http");
 let fs = require("fs");
 
 let server = http.createServer((req, res) => {
-    fs.readFile("./index.html", (err, data) => {
-        res.end(data.toString())
-    })
+    res.end('Nothing!')
 })
 
 server.listen(3300, () => {
@@ -68,7 +60,6 @@ function getCount(callback){
 (SELECT COUNT(*) FROM bullet where is_custom=1)AS C2`;
     db.query(sql, function (error, results, fields) {
         if (error) throw error;
-        console.log(results)
         callback(results[0])
     });
 }
