@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+
+// 修改为你自己的数据库登录信息
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',

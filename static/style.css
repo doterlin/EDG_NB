@@ -90,6 +90,31 @@ body,
     flex-direction: column;
 }
 
+.qrcode-wrap{
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 12px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #000;
+    color: #fff;
+}
+
+.qrcode{
+    margin-bottom: 5px;
+    width: 60px;
+    height: 60px;
+}
+
+.qrcode-wrap p{
+    line-height: 1;
+    margin: 0;
+}
+
 .dc-main {
     color: #fff;
     font-size: 30px;

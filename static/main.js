@@ -1,7 +1,9 @@
 // author: doterlin(岛民小强)
 // description: 主要是背景动画,弹幕效果和建立websocket连接
-// TODO: 统计,二维码,websocket守护进程,抽出前后端config,移动端适配
+// TODO: 二维码,websocket守护进程
 (function () {
+    console.log('%c 召唤师，你是来寻找彩蛋的吗? (yes()/no())', 'color: #fff;padding: 10px; background: #000;font-weight: bold; border-radius: 3px;');
+    
     var parentEl = document.getElementById('bullet');
     var countText1 = document.getElementById('number_text1');
     var countText2 = document.getElementById('number_text2');
@@ -173,5 +175,13 @@
         });
 
         return socket;
+    }
+
+    window.yes = function(){
+        console.log('想办法发一个你自定义文字的弹幕')
+    }
+
+    window.no = function(){
+        console.log('祝你们在桥上打得开心！')
     }
 })();
